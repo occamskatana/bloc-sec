@@ -1,0 +1,11 @@
+1(a). In the line structure, we are able to represent a real world queue, allowing us to add people to the end of the line, remove people and move the rest forward as we would in a real line, and search for people. 
+
+1(b) In the screen structure, I represented a screen by a matrix defined by the width and height attributes of the screen. I then converted the matrix into an array of arrays, allowing for manipulation of the individual pixels. I am able to select a pixel by its XY coordinates, and insert a pixel onto the screen using the XY selection.  
+
+2(a) If a developer wanted a specific element, he would use the Line#search method and give a desired string as an argument. 
+
+2(b) A developer would use the Screen#at method and give desired XY coordinates as arguments. 
+
+3(a) The Line object could represent any queue that implements a FIFO procedure. 
+
+3(b)The Screen object could be used to represent images, maps, or anything else that is segmented into parts('pixels') and is two dimensional. 
