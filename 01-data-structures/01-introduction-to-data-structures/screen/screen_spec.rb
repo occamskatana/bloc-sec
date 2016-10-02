@@ -1,4 +1,5 @@
 include RSpec
+require 'matrix'
 
 require_relative 'screen'
 
@@ -11,6 +12,12 @@ RSpec.describe Screen, type: Class do
       screen.insert(p, 1, 1)
       expect(screen.at(1, 1)).to eq p
     end
+
+  describe "matrix" do 
+    it "builds a properly dimensioned matrix upon instantiation and converts it to array for ease of use" do 
+      expect(screen.matrix).to eq(Matrix.build(10, 10){nil}.to_a)
+    end
+  end
 
     it "retains color information upon insertion" do
       p = Pixel.new(255, 255, 255, 1, 1)
