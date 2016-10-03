@@ -1,1 +1,12 @@
 1. Spatial Locality is a principle in memory management where data is accessed from a relatively confined space. Because of this principle, in a single dimensional array, a computer can pull and cache the data relating to an array because it has a guarantee that the data is located near the target data. Because reading from a cache is much faster than memory, arrays tend to see superior performance when compared to linked lists. 
+
+
+2. 
+
+                                user     system      total        real
+Build Array:                0.060000   0.000000   0.060000 (  0.056302)
+Build Linked List:          0.230000   0.010000   0.240000 (  0.236933)
+Read From LinkedList        0.000000   0.000000   0.000000 (  0.000241)
+Read From Array             0.000000   0.000000   0.000000 (  0.000002)
+Delete From LinkedList      0.000000   0.000000   0.000000 (  0.000004)
+Delete From Array           0.000000   0.000000   0.000000 (  0.001135)

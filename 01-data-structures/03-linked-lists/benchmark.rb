@@ -34,7 +34,7 @@ require_relative 'node.rb'
 		}
 
 		x.report("Delete From Array"){
-			@array.delete_at(5000)
+			@array.delete_at(500000)
 		}
 
 
