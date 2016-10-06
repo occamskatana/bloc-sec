@@ -29,9 +29,12 @@ RSpec.describe HashClass, type: Class do
 
     it "copies existing values properly when the array is resized" do
       movies = HashClass.new(30)
+      expect(movies.size).to eq 30
       movies["A New Hope"] = "Average"
       movies["Empire Strikes Back"] = "Excellent"
       movies["Return of the Jedi"] = "The Best"
+      expect(movies["Return of the Jedi"]).to eq "The Best"
+      expect(movies.size).to eq 30
       movies.resize
       expect(movies.size).to eq 60
       expect(movies["A New Hope"]).to eq "Average"
