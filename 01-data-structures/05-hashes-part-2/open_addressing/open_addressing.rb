@@ -45,6 +45,25 @@ class OpenAddressing
     return asc % size
   end
 
+  def print
+    @items.each do |item|
+      if item != nil
+        puts("{#{item.key}: #{item.value}}") 
+      end
+    end
+    puts "Load Factor is: #{self.load_factor()}"
+  end
+
+  def load_factor
+    count = 0
+    for i in 0..@items.length - 1 do 
+      count += 1 if @items[i] != nil
+    end
+    return count.to_f / @items.length.to_f
+  end
+
+
+
   # Given an index, find the next open index in @items
   def next_open_index(index)
     temp = index
@@ -80,3 +99,13 @@ class OpenAddressing
     end
   end
 end
+
+star_wars_movies = OpenAddressing.new(6)
+star_wars_movies["Star Wars: The Phantom Menace"] = "Number One"
+star_wars_movies["Star Wars: Attack of the Clones"] = "Number Two"
+star_wars_movies["Star Wars: Revenge of the Sith"] = "Number Three"
+star_wars_movies["Star Wars: A New Hope"] = "Number Four"
+star_wars_movies["Star Wars: The Empire Strikes Back"] = "Number Five"
+star_wars_movies["Star Wars: Return of the Jedi"] = "Number Six"
+
+star_wars_movies.print
