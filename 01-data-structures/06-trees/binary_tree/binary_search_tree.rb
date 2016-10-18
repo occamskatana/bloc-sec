@@ -20,15 +20,31 @@ class BinarySearchTree
         current = current.right
       end
 
-      if current.left == nil || current.right == nil 
-        if current.rating >= node.rating
+      # if current.left == nil || current.right == nil 
+      #   if current.rating > node.rating
+      #     current.left = node
+      #     node.parent = current
+      #     break
+      #   elsif current.rating < node.rating
+      #     current.right = node
+      #     node.parent = current
+      #     break
+      #   end
+      # end
+
+      if current.left == nil 
+        if current.rating > node.rating 
           current.left = node
-          node.parent = current
+          node.parent = current  
           break
-        elsif current.rating <= node.rating
-          current.right = node
+        end
+      end
+
+      if current.right == nil 
+        if current.rating < node.rating 
+          current.right = node 
           node.parent = current
-          break
+          break 
         end
       end
 
