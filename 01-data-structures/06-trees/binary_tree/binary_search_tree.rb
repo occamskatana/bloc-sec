@@ -80,28 +80,24 @@ class BinarySearchTree
   # Recursive Breadth First Search
   def printf(children=nil)
     queue = [@root]
-    print_list = []
     while !queue.empty?
-      current = queue.shift 
-      print_list << current 
-      queue.unshift(current.right) if current.right != nil 
-      queue.unshift(current.left) if current.left != nil 
-      
+      current = queue.shift()
+      print "#{current.title}: #{current.rating}\n"
+      queue.push(current.left) if current.left != nil 
+      queue.push(current.right) if current.right != nil 
     end
-    print_list.each do |item|
-      puts "#{item.title}: #{item.rating}"
-    end
+    return true
   end
 end
 
-root = Node.new("The Matrix", 87)
-pr = Node.new("Pacific Rim", 72)
-tree = BinarySearchTree.new(root)
+# root = Node.new("The Matrix", 87)
+# pr = Node.new("Pacific Rim", 72)
+# tree = BinarySearchTree.new(root)
 
-tree.insert(root, pr)
+# tree.insert(root, pr)
 
-puts tree.find(root, pr.title)
-puts tree.delete(root, pr.title)
+# puts tree.find(root, pr.title)
+# puts tree.delete(root, pr.title)
 
-puts tree.find(root, pr.title)
+# puts tree.find(root, pr.title)
 
