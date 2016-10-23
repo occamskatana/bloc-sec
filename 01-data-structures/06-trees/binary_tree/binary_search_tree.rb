@@ -51,9 +51,7 @@ class BinarySearchTree
       stack << current.left if current.left != nil 
       stack << current.right if current.right != nil 
     end
-
     return nil 
-
   end
 
   def delete(root, data)

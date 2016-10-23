@@ -61,10 +61,6 @@ class MinTree
 		@root = @items[parent_index] if parent_index == 1
 	end
 
-	def dfs(node)
-	
-	end
-
 	protected 
 
 	def assign_indices
@@ -79,7 +75,9 @@ class MinTree
 		@root.parent = nil
 	end
 end
+
 #This was used for print testing and may or may not be needed in the future
+
 # root = Node.new("The Matrix", 87)
 # tree = MinTree.new(root) 
 # pacific_rim = Node.new("Pacific Rim", 72)

@@ -14,5 +14,16 @@ class Node
   def <= (other_node)
   	self.rating <= other_node.rating if self.rating != nil  && other_node.rating != nil 
   end
-  
+
+  def >= (other_node)
+    self.rating >= other_node.rating if self.rating != nil && other_node.rating != nil
+  end
+
+  def < (other_node)
+    self.rating < other_node.rating if self.rating != nil && other_node.rating != nil 
+  end
+
+  def > (other_node)
+    self.rating > other_node.rating if self.rating != nil && other_node.rating != nil 
+  end  
 end

@@ -1,13 +1,10 @@
 include RSpec
-
 require_relative 'min_tree.rb'
 require_relative 'node.rb'
-
 
 RSpec.describe MinTree, type: Class do 
 
 	let (:root) { Node.new("The Matrix", 87) }
-
   let (:tree) { MinTree.new(root) }
   let (:pacific_rim) { Node.new("Pacific Rim", 72) }
   let (:braveheart) { Node.new("Braveheart", 78) }
@@ -37,7 +34,6 @@ RSpec.describe MinTree, type: Class do
    tree.insert(root, mad_max_2)
     tree.insert(root, donnie)
   end
-
 
   describe "MinTree#insert" do
 
@@ -108,8 +104,6 @@ RSpec.describe MinTree, type: Class do
     end
   end
 
-
-
   describe "assign indices" do 
     it "assigns the index in the array to the node object" do 
       insert_shit
@@ -119,9 +113,4 @@ RSpec.describe MinTree, type: Class do
       expect(tree.root.right).to_not be(nil)
     end
   end
-
-	
-
-
-
 end
