@@ -55,6 +55,4 @@ Benchmark.bm(10) do |x|
 	x.report("Binary Tree Delete") do 
 		binary_tree.delete(zero_node, 5000.to_s)
 	end
-
-
 end
