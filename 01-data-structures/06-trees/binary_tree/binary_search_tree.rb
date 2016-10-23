@@ -20,18 +20,6 @@ class BinarySearchTree
         current = current.right
       end
 
-      # if current.left == nil || current.right == nil 
-      #   if current.rating > node.rating
-      #     current.left = node
-      #     node.parent = current
-      #     break
-      #   elsif current.rating < node.rating
-      #     current.right = node
-      #     node.parent = current
-      #     break
-      #   end
-      # end
-
       if current.left == nil 
         if current.rating > node.rating 
           current.left = node
@@ -47,7 +35,6 @@ class BinarySearchTree
           break 
         end
       end
-
     end
   end
 
@@ -88,9 +75,6 @@ class BinarySearchTree
     end
 
     return true
-
-
-
   end
 
   # Recursive Breadth First Search
@@ -106,6 +90,7 @@ class BinarySearchTree
   end
 end
 
+#lines here used for print fu nction testing, may or may not be used in the future
 # root = Node.new("The Matrix", 87)
 # pr = Node.new("Pacific Rim", 72)
 # tree = BinarySearchTree.new(root)
@@ -116,4 +101,3 @@ end
 # puts tree.delete(root, pr.title)
 
 # puts tree.find(root, pr.title)
-

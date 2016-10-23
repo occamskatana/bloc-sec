@@ -9,4 +9,12 @@ class Node
   	@title = title 
   	@rating = rating
   end
+
+  def > (otherNode)
+  	self.rating > otherNode.rating 
+  end
+
+  def < (otherNode)
+  	self.rating < otherNode.rating
+  end
 end

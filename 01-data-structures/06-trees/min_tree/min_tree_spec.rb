@@ -33,9 +33,9 @@ RSpec.describe MinTree, type: Class do
    tree.insert(root, pacific_rim)
    tree.insert(root, inception)
    tree.insert(root, braveheart)
-   tree.insert(root, shawshank)
    tree.insert(root, district)
    tree.insert(root, mad_max_2)
+    tree.insert(root, donnie)
   end
 
 
@@ -50,29 +50,65 @@ RSpec.describe MinTree, type: Class do
       tree.insert(root, braveheart)
       expect(tree.root.title).to eq("Braveheart")
     end
+
+    it "assigns left and right pointer values" do 
+      tree.insert(root, braveheart)
+      tree.insert(root, jedi)
+      expect(tree.root.left.title).to eq("The Matrix")
+      expect(tree.root.right.title).to eq(jedi.title)
+      expect(tree.root.right.parent).to be(tree.root)
+      expect(tree.root.left.parent).to be(tree.root)
+    end
+
+    it "percolates up properly" do
+      tree.insert(root, braveheart)
+      expect(tree.root.title).to eq("Braveheart")
+    end
   end
+
 
   describe "MinTree#search" do 
-    it "finds what it is looking for" do
-      insert_shit()
-      expect(tree.find(root, donnie).title).to eq("Donnie Darko")
+    it "returns proper searched node" do
+      insert_shit
+      expect(tree.find(root, donnie).title).to eq(donnie.title)
+      expect(tree.find(root, martian).title).to eq(martian.title)
+    end
+
+    it "returns nil if not found" do 
+      expect(tree.find(root, shawshank)).to eq(nil)
+    end
+  end
+
+  describe "MinTree#delete" do 
+    it "deletes the object from the tree" do 
+      insert_shit
+      tree.delete(root, hope)
+      expect(tree.find(root, hope)).to be(nil)
+      expect(tree.find(root, inception)).to_not be_nil
+      tree.delete(root, inception)
+      expect(tree.find(root, inception)).to be(nil)
+    end
+
+    it "should retain heap data structure" do 
+      insert_shit
+      tree.delete(root, hope)
+      tree.delete(root, inception)
+      tree.delete(root, braveheart)
+
+      expect(tree.root.left.rating > tree.root.rating).to be(true)
+      expect(tree.root.left.left.rating > tree.root.left.rating).to be(true)
+      expect(tree.root.right.rating > tree.root.rating).to be(true)
+      expect(tree.root.right.right.rating > tree.root.right.rating).to be(true)
+    end
+  end
+
+  describe "MinTree#print" do 
+    it "should print the tree" do 
+      expect(tree.print).to eq()
     end
   end
 
 
-  # describe "Depth first search" do 
-  #   it "finds the proper depth to put the node" do 
-  #     tree.insert(root, braveheart)
-  #     tree.insert(root, shawshank)
-  #     tree.insert(root, empire)
-  #   end
-  # end 
-
-  describe "MinTree#switch" do 
-    it "switches the parent and child locations" do 
-
-    end
-  end
 
   describe "assign indices" do 
     it "assigns the index in the array to the node object" do 
