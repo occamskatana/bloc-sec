@@ -37,7 +37,7 @@ class MinTree
     hit = nil
     @items.each do |item|
       next if item.nil?
-      hit = item if item.title == data
+      hit = item if item == data
     end
     return hit
 	end

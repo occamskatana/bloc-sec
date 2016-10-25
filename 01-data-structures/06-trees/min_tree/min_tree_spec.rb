@@ -98,11 +98,7 @@ RSpec.describe MinTree, type: Class do
     end
   end
 
-  describe "MinTree#print" do 
-    it "should print the tree" do 
-      expect(tree.print).to eq()
-    end
-  end
+  
 
   describe "assign indices" do 
     it "assigns the index in the array to the node object" do 
