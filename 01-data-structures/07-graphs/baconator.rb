@@ -10,31 +10,33 @@ def find_kevin_bacon(node)
 	return path
 end
 
-# Fuck this
+# I'm a retard
 # def BFS(node)
 # 	paths = []
 # 	stack = [node]
 # 	current = stack.shift
-# 	current.film_actor_hash.each do |key, value|
-# 		if !paths.empty?
-# 			for i in 0..paths.length - 1
-# 				paths[i] << value[i] if 
+# 	paths.each do |path|
+# 		current.each do |key, value|
+# 			value.each do |actor|
+# 				if paths.empty?
+# 					paths << [actor]
+# 				else
+# 					path << actor if !path.include?(actor) && path.length <= 6
+# 					stack << actor if !stack.include(actor)
+# 				end
 # 			end
-# 		else
-
 # 		end
 # 	end
 # end
 
 def bfs(node)
-
-	stack = []
+	
 end
 
 def check_for_bacon(array)
 	array.each do |item|
 		if item.name == "Kevin Bacon" 
-			return true
+			return array
 		end
 	end
 	return false
