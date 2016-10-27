@@ -9,7 +9,7 @@ class Baconator
 		end
 		path << node
 		path = arrange_path(path)
-		return arrange_path(path)
+		return path
 	end
 
 	def bfs(start_node)
