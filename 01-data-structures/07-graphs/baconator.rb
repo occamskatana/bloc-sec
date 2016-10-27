@@ -1,50 +1,43 @@
-require_relative('node.rb')
-require_relative('../')
+require_relative('bacon_heap.rb')
+
 def find_kevin_bacon(node)
-	path = nil
+	path = []
+	bacon = bfs(node)
 
-
-
-
+	while bacon != node do 
+		path << bacon
+		bacon = bacon.parent
+	end
 
 	return path
 end
 
-# I'm a retard
-# def BFS(node)
-# 	paths = []
-# 	stack = [node]
-# 	current = stack.shift
-# 	paths.each do |path|
-# 		current.each do |key, value|
-# 			value.each do |actor|
-# 				if paths.empty?
-# 					paths << [actor]
-# 				else
-# 					path << actor if !path.include?(actor) && path.length <= 6
-# 					stack << actor if !stack.include(actor)
-# 				end
-# 			end
+def bfs(start_node)
+	unvisited = [node]
+	visited = []
+	current = unvisited.shift
+	current.neighbors.each do |neighbor|
+		unvisited << neighbor if !visited.include?(neighbor)
+		neighbor.came_from = current
+	end
+	visited << current
+	return current if current.name == "Kevin Bacon"
+end
+
+
+#Not Needed 
+# def check_for_bacon(array)
+# 	array.each do |item|
+# 		if item.name == "Kevin Bacon" 
+# 			return array
 # 		end
 # 	end
+# 	return false
 # end
 
-def bfs(node)
-	
-end
 
-def check_for_bacon(array)
-	array.each do |item|
-		if item.name == "Kevin Bacon" 
-			return array
-		end
-	end
-	return false
-end
+# arr = Array.new
+# node = Node.new("Kevin Bacon")
+# arr.push(node)
 
-
-arr = Array.new
-node = Node.new("Kevin Bacon")
-arr.push(node)
-
-puts check_for_bacon(arr)
+# puts check_for_bacon(arr)
