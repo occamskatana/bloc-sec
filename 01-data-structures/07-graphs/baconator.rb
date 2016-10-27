@@ -1,43 +1,39 @@
-require_relative('bacon_heap.rb')
+class Baconator
 
-def find_kevin_bacon(node)
-	path = []
-	bacon = bfs(node)
-
-	while bacon != node do 
-		path << bacon
-		bacon = bacon.parent
+	def find_kevin_bacon(node)
+		path = []
+		bacon = bfs(node)
+		while bacon != node do 
+			path << bacon
+			bacon = bacon.came_from
+		end
+		path << node
+		path = arrange_path(path)
+		return arrange_path(path)
 	end
 
-	return path
-end
-
-def bfs(start_node)
-	unvisited = [node]
-	visited = []
-	current = unvisited.shift
-	current.neighbors.each do |neighbor|
-		unvisited << neighbor if !visited.include?(neighbor)
-		neighbor.came_from = current
+	def bfs(start_node)
+		unvisited = [start_node]
+		visited = []
+		i = 0
+		until i >= 6 do 
+			current = unvisited.shift
+			current.neighbors.each do |neighbor|
+				unvisited << neighbor
+				neighbor.came_from = current
+			end
+			visited << current
+			return current if current.name == "Kevin Bacon"
+			i += 1
+		end
 	end
-	visited << current
-	return current if current.name == "Kevin Bacon"
+
+	def arrange_path(path)
+		new_path = []
+		path.each do |node|
+			new_path << node.name
+		end
+		return new_path.reverse!
+	end
 end
 
-
-#Not Needed 
-# def check_for_bacon(array)
-# 	array.each do |item|
-# 		if item.name == "Kevin Bacon" 
-# 			return array
-# 		end
-# 	end
-# 	return false
-# end
-
-
-# arr = Array.new
-# node = Node.new("Kevin Bacon")
-# arr.push(node)
-
-# puts check_for_bacon(arr)

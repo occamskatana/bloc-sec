@@ -1,17 +1,17 @@
-class Node 
+class Node
+
 	attr_accessor :film_actor_hash
 	attr_accessor :name
 	attr_accessor :level
 	attr_accessor :neighbors
 	attr_accessor :came_from
 
-	def initialize(name, level)
+	def initialize(name, fah)
 		@name = name
-		@level = level
-		@neighbors = find_neighbors
+		@film_actor_hash = fah
 	end
 
-	def find_neighbors
+	def neighbors
 		neighbor_array = []
 		self.film_actor_hash.each do |key, value|
 			value.each do |actor|
@@ -20,4 +20,5 @@ class Node
 		end
 		return neighbor_array
 	end
+	
 end
