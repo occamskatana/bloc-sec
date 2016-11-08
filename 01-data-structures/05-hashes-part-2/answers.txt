@@ -1,0 +1,32 @@
+1. Hopscotch Hashing: a mix of cuckoo hashing and linear probing, that defines a "neighborhood" of buckets around an original hashed bucket. When inserting an entry, the algorithm will attempt to add it to one of the buckets in the neighborhood. If none are found, the algorithm will traverse the buckets, as in linear probing, until an open spot is found. The open spot is found by shifting objects over one another, with the goal of moving the spot into the original neighborhood. When the slot reaches the neighborhood, the object is added. 
+
+2. Incremental resizing - Instead of enlarging the whole hash table at once, incremental resizing creates a whole new table, leaving the original unchanged. Every time a lookup or delete happens, the respective algorithms will check both tables, inserting only on the new table, and incrementally moving a fixed number of objects to the new table with each insertion. When all elements are removed from the old table, it is deleted. 
+
+3. Two Choice Hashing - When initially hashing an object, this algorithm uses one of two hashing functions, inserting at one of two different table locations.
+
+4. For my colision resolution strategy, I would take an index, check adjacent indices to the original bucket until total bucket size / 2 buckets were checked, and if these were also full, would flip the sign on the index. For example, index 5 would become index -5, at which point I would check the bucket and ajacent buckets. At this point, I would have the algorithm do the same thing in that neighborhood until every bucket in the array proved to be checked; at this point I would obviously resize. 
+
+Open Addressing Print Function 
+{Star Wars: The Empire Strikes Back: Number Five}
+{Star Wars: Attack of the Clones: Number Two}
+{Star Wars: A New Hope: Number Four}
+{Star Wars: Return of the Jedi: Number Six}
+{Star Wars: The Phantom Menace: Number One}
+{Star Wars: Revenge of the Sith: Number Three}
+Load Factor is: 0.5
+
+Separate Chaining Print Function
+
+Star Wars: The Empire Strikes Back, Number Five
+~~~~~~~~~~~~~~~
+Star Wars: Return of the Jedi, Number Six
+Star Wars: Attack of the Clones, Number Two
+~~~~~~~~~~~~~~~
+Star Wars: A New Hope, Number Four
+~~~~~~~~~~~~~~~
+Star Wars: The Phantom Menace, Number One
+~~~~~~~~~~~~~~~
+Star Wars: Revenge of the Sith, Number Three
+~~~~~~~~~~~~~~~
+Load factor is 0.5
+

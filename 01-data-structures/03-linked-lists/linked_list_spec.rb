@@ -14,6 +14,7 @@ RSpec.describe LinkedList, type: Class do
       llist.add_to_tail(n1)
       expect(llist.tail).to eq n1
       llist.add_to_tail(n2)
+      expect(llist.head.next).to eq n2
       expect(llist.tail).to eq n2
     end
   end
@@ -89,4 +90,18 @@ RSpec.describe LinkedList, type: Class do
       expect(llist.head).to eq nil
     end
   end
+
+  # describe "#iterate" do 
+  #   it "iterates through the array, and returns the last non-tail node" do 
+  #     llist.add_to_tail(n1)
+  #     expect(llist.head).to eq n1
+  #     llist.add_to_tail(n2)
+  #     expect(llist.head).to eq n2
+  #     llist.add_to_tail(n3)
+  #     expect(llist).head to eq n3
+
+  #     expect(llist.iterate).to eq n2
+
+  #   end
+  # end
 end

@@ -1,0 +1,7 @@
+Doubling the size of the underlying array is a poor idea for many reasons. First, as mentioned it fragments the data and is an extremely slow operation. It also costs a lot in terms of time, as having to manage memory and/or disk resources is extremely slow compared to a cache. The biggest issue with doubling a hash table each time is once one reaches the "second half of the chessboard" in terms of exponential growth, the doubling can lead to an astronomical amount of indices being needlessly added if the table grows to a big enough size. 
+
+
+There are,  however, some benefits for allocating more space than needed. Studies have shown that the biggest consumer of time in a hash lookup function is the hashing function, rather than the inner loop of the iterative search. Having to recalculate large amounts of hash keys more times than needed.
+
+
+As always, the decision comes down to properly assessing needs and researching solutions. 

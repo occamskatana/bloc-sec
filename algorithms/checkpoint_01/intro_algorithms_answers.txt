@@ -1,0 +1,37 @@
+function walk_dog
+	CALL dog.tieLeash
+	set stepCount to 0
+	UNTIL dog.tired
+		stepCount += 1
+	END UNTIL
+	IF dog.cleanliness is dirty THEN
+		CALL dog.clean
+	ELSE
+		CALL dog.untieLeash
+	END IF
+end_function
+
+function calculate_tip(bill_amount)
+	IF service is good THEN
+		return bill_amount + bill_amount times 15 percent
+	ELSE
+	 	return bill_amount + bill_amount times 10 percent
+	END IF
+end_function
+
+function makeCoffee
+
+	IF coffee filter is full THEN
+		remove coffee filter
+		set new coffee filter
+	ELSE
+		set new coffee filter
+	END IF
+
+	CALL coffeeMaker.start
+
+	WAIT 3000 seconds
+
+	pour coffee
+
+end function
