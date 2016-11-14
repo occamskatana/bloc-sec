@@ -1,0 +1,15 @@
+1. It would take 7 iterations to reach element G. 
+2. it would take 3 iterations to reach element G. 
+3. 55, 89, 144, respectively. 
+
+Benchmarking both iterative and recursive functions yields interesting results:
+
+            user     system      total        real
+Recursive  0.000000   0.000000   0.000000 (  0.000794)
+Iterative  0.000000   0.000000   0.000000 (  0.000003)
+
+I believe this is because of the overhead required to generate and store the extra closures and variables required to maintain an iterative search. 
+
+1. Given an unsorted collection of a million items, I would be forced to use a linear search, as there would be no way to compare items in any meaningful manner in order to divide and conquer. Given the length of the collection of items, there might be benefit in sorting and then performing a binary search. 
+
+2. I would use a binary search algorithm. It requires O(logn) time vs O(n) time, making it exponentially faster. 
