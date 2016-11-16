@@ -7,7 +7,9 @@ RSpec.describe "Monkey Pached Array Sort Algorithms", type: Class do
 	let(:collection){[5, 4, 6, 7, 4, 2, 3]}
 
 	it "returns the shit sorted for heap sort" do 
-		expect(collection.heap_sort).to eq(collection.sort)
+		temp = collection
+		collection.heapsort!
+		expect(collection).to eq(temp.sort)
 	end
 
 	it "returns the shit sorted for quick sort" do
@@ -16,6 +18,7 @@ RSpec.describe "Monkey Pached Array Sort Algorithms", type: Class do
 	end
 
 	it "returns the shit sorted for bucket sort" do 
+		temp = collection.sort
 		expect(collection.bucket_sort).to eq(collection.sort)
 	end
 

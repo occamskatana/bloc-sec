@@ -1,7 +1,4 @@
 include Enumerable
-require_relative('../../01-data-structures/06-trees/min_tree/min_tree.rb
-')
-require(x)
 def insertion_sort(collection)
   # #1
   sorted_collection = [collection.delete_at(0)]
@@ -122,28 +119,75 @@ def partition(array, low, high)
   end
 
 class Array
-	def quick_sort
-		return self if self.length <= 1
-		pivot_index = self.length / 2
-		pivot_item = self[pivot_index]
-		self.delete_at(pivot_index)
-		lesser = []
-		greater = []
-		self.each do |item|
-			if item <= pivot_item 
-				lesser << item 
-			else
-				greater << item
-			end
-		end
-		return lesser.quick_sort + [pivot_item] + greater.quick_sort
-	end
+  def quick_sort
+    return self if self.length <= 1
+    pivot_index = self.length / 2
+    pivot_item = self[pivot_index]
+    self.delete_at(pivot_index)
+    lesser = []
+    greater = []
+    self.each do |item|
+      if item <= pivot_item
+        lesser << item
+      else
+        greater << item
+      end
+    end
+    return lesser.quick_sort + [pivot_item] + greater.quick_sort
+  end
 
-	def heap_sort
-		heap = []
-		count = self.count
-	end
+  def heapsort!
+    1.upto(self.length - 1) do |i|
+      child = i
+      while child > 0
+        parent = (child - 1) / 2
+        if self[parent] < self[child]
+          self[parent], self[child] = self[child], self[parent]
+          child = parent
+        else
+          break
+        end
+      end
+    end
+    i = self.length - 1
+    while i > 0
+      self[0], self[i] = self[i], self[0]
+      i -= 1
+      parent = 0
+      while parent * 2 + 1 <= i
+        child = parent * 2 + 1
+        if child < i && self[child] < self[child + 1]
+          child += 1
+        end
+        if self[parent] < self[child]
+          self[parent], self[child] = self[child], self[parent]
+          parent = child
+        else
+          break
+        end
+      end
+    end
+    return self
+  end
 
+  def bucket_sort(bucket_size=5)
+  	sorted_array = []
+  	max = self.max
+  	min = self.min
+  	bucket_count = ((max - min) / bucket_size) + 1
+  	buckets = Array.new(bucket_count){Array.new}
+  	for i in 0..self.length - 1 do 
+  		indx = ((self[i] - min) / bucket_size).floor
+  		buckets[indx] << self[i] unless self[i] == nil
+  	end
+  	buckets.each do |bucket|
+  		sorted = insertion_sort(bucket)
+  		sorted.each do |item|
+  			sorted_array << item
+  		end
+  	end
+  	return sorted_array
+  end
 end
 
 
