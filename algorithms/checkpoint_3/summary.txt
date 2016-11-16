@@ -1,0 +1,23 @@
+The benchmark stacks up as follows when working with an array of 50 integers.
+
+                     user     system      total        real
+Insertion Sort   0.000000   0.000000   0.000000 (  0.000057)
+Selection Sort   0.000000   0.000000   0.000000 (  0.000051)
+Bubble Sort      0.000000   0.000000   0.000000 (  0.000189)
+Merge Sort       0.000000   0.000000   0.000000 (  0.000108)
+Quick Sort       0.000000   0.000000   0.000000 (  0.000042)
+Heap Sort        0.000000   0.000000   0.000000 (  0.000055)
+Bucket Sort      0.000000   0.000000   0.000000 (  0.000196)
+
+As the name suggests, quicksort sorts the objects the most quickly out of all of the methods written, followed closely by heap sort. I surmised that the overhead of some of the methods and brute force iteration count would obviously cause the time taken to rise, so I ran the same benchmark with 5000 integers, with this result.
+
+                     user     system      total        real
+Insertion Sort   0.280000   0.000000   0.280000 (  0.287089)
+Selection Sort   0.290000   0.000000   0.290000 (  0.289169)
+Bubble Sort      1.820000   0.000000   1.820000 (  1.817968)
+Merge Sort       0.050000   0.000000   0.050000 (  0.048004)
+Quick Sort       0.010000   0.000000   0.010000 (  0.009063)
+Heap Sort        0.010000   0.000000   0.010000 (  0.009353)
+Bucket Sort      0.000000   0.000000   0.000000 (  0.004925)
+
+As one might guess, bubble sort takes much longer due to the increase in the number of elements N. The algorithms that break the array into smaller pieces recursively seem to be much faster, due to N requiring exponentially fewer iterations. 
