@@ -1,0 +1,13 @@
+                 user     system      total        real
+Min Tree Insert  9.400000   0.000000   9.400000 (  9.405606)
+Binary Tree Insert  2.620000   0.000000   2.620000 (  2.618390)
+Min Tree Find  0.000000   0.000000   0.000000 (  0.000879)
+Binary Tree Find  0.000000   0.000000   0.000000 (  0.000283)
+Min Tree Delete  0.000000   0.000000   0.000000 (  0.000819)
+Binary Tree Delete
+
+On average, a min tree insert takes around 3.6 times as long as a binary tree insert, probably due to my inefficient insertion algorithm. 
+Finding a node seems to take a trivial amount of time either way, but it takes around 1/4 as long in a binary tree vs a min heap.
+Deletion seems to take much longer in a binary tree than in a min heap. 
+I would use a binary tree to store data that didn't need to be manipulated or deleted all that often. I would use a min heap for tasks such as keeping track of 
+data processing: a process that requires working through the list in an ordered way and deleting often. 
