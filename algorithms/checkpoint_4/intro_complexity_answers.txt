@@ -1,0 +1,23 @@
+1. An algorithm that has efficiency O(1) is a Formula 1 car, and an algorithm that has O(2^n) is a bicycle.
+
+2. The best case scenario for a binary search would be finding the target on the first iteration, in which case the target would be the median index item of the array.
+
+3. The worst case for a binary search would be a situation where the target item has the highest or lowest index within the array, causing the algorithm to have to perform the maximum possible iterations in order to find the item, given the item is guaranteed to be in the lookup array. Otherwise the worse case scenario would be that the item does not exist.
+
+4. The bounded case for binary search would be the average of the worst and best bounds in respect to run time. 
+
+5.  See attached file for graph. 
+
+6. The line can be described as F(n) = 2^n.
+
+7. The big O would be O(n^2), or quadritic time. 
+
+8. See complexity.rb
+
+9. See output_chart.png
+
+10. The Big O of binary search would be O(log n)
+
+11. Big-Ω of binary search woud be Ω(1)
+
+12. IF I understand correctly, big theta would be (log n + 1) / 2
