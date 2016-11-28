@@ -1,0 +1,11 @@
+1. The big O of goodbye_world would be constant time or O(1)
+
+2. The big O of find_largest would be O(n), or linear time.
+
+3. The big O of find_largest would be n^2, given a constant number of items per array based on n. Regardless of the number of n, the algorithm must iterate through all items in each subarray. The work can be seen through the benchmark on the attached file "scratch.rb"
+
+4. The big O of numbers_recursive would be O(2^n). In each recursion, we call the function twice until we return 1 or 0. This would eventually reduce mathematically to O(2 * 2 * 2 ...) times n.
+
+5. The numbers_iterative algorithm runs in linear, or O(n) time, with the number of operations rising based on the value of n. This is because the loop will only run n - 1 times.
+
+6. The worst case performance would equal O(n^2), although with quicksort, the worst case is quite rare, as it requires very unbalanced partitions to happen. The reason for the poor worst case performance is in this case, the pivot point will be either the smallest or largest item in the collection, resulting in partition sizes of 0 and n - 1. In the worst case, this behaivor will happen every time the collection is partitioned, resulting in a linear chain of n - 1 nested calls.
