@@ -109,7 +109,7 @@ def join_query(*queries, *tables, join_type=nil, *conditions)
 		query += conditions[0]
 	end
 
-	
+	return query
 
 end
 
