@@ -1,0 +1,5 @@
+Version one: Given that the funciton uses an insertion sort as the main driver for the algorithm, the big O would be O(n^2). 
+
+Version Two: Again, we take combining the arrays as a given amount of time and use a counting sort algorithm, which runs in O(k+n) time.
+
+Version Three: Given that we are sorting what essentially comes down to an array of arrays, it would be nearly impossible to improve the space complexity of the problem. The big O of the given solution is O(n^2), since Ruby uses Quicksort at the language level. 
