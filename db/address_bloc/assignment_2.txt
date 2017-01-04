@@ -1,0 +1,32 @@
+1. A Ruby Gem is a library, specifically formatted for Ruby's native package manager Rubygems. We would use a library in order to bring in functionality to our code, rather than having to write it from scratch. In making one, we can abstract our code into something portable that can be used elsewhere. 
+
+2. Lazy loading allows us to save time by not instantating or calculating something until it is specifically called. Generally, this would involve not loading child or related objects in an ORM scenario until they are specifically requested. Eager loading, on the other hand, loads child and related objects when the parent object is requested. 
+
+3. The CREATE TABLE SQL statement does basically what the statement says. It creates a table for a developer to store data, with a specific set of data expected. The INSERT INTO SQL statement inserts a set of data into a specified table, thus persisting it. 
+
+4. Include brings in the module methods as instance methods of a class. These methods are defined when a new object with the given class is instantiated. Extend on the other hand brings in the methods of a module as class methods. These methods are attached to the class, rather than the intantiated object. 
+
+5. The save methods must be instance methods because they relate to specific instances of the given object. After all, we save objects, not classes to the database. 
+
+6.  UPDATE character
+     SET "character_name"="Jar-Jar Binks", "star_rating"=1
+     WHERE id = 1
+
+7. We will net to add a method to the Selection module that allows us to query certain tables, perhaps with filtering by attributes, etc. 
+
+8.  def camelize(snake_cased_word)
+      string = snake_cased_word.gsub(/_/, " ")
+      str_array = string.split(" ")
+      str_array.each do |word|
+        word.capitalize!
+      end
+      return str_array.join
+    end
+
+9. def find_by(attribute, value)
+		results = []
+		connection.execute("SELECT * FROM #{table} WHERE #{attribute}=#{value};") do |row|
+			row << results
+		end
+		return results
+	end
