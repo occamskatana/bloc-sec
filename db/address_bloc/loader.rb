@@ -1,0 +1,1 @@
+system "bundle exec rspec spec/address_book_spec.rb"
