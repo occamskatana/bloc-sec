@@ -95,27 +95,21 @@ module Selection
 
     if block_given?
       rows_array.each do |row|
-        yield
+        yield(row)
       end
     end
     rows_array
   end  
 
   def find_in_batches(options={}, &block)
-    rows = connection.execute <<-SQL 
-      SELECT #{columns.join ","} from #{table}
-      LIMIT #{options[:batch_size]}
-    SQL
-    rows_array = rows_to_array(rows)
+    batch = find_each(start: options[:start], batch_size: options[:batch_size])
     object_array = []
-    rows_array.each do |row|
+    batch.each do |row|
       object_array << init_object_from_row(row)
     end
 
     if block_given?
-      object_array.each do |object|
-        yield
-      end
+      yield(object_array, batch)
     end 
 
     object_array
