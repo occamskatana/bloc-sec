@@ -19,5 +19,15 @@ module BlocRecord
         self.instance_variable_set("@#{col}", options[col])
       end
     end
+
+    def self.method_missing(m, *args)
+      if m[0..6] == "find_by"
+        string = m.to_s
+        arg = string[8..string.length].to_sym
+        self.find_by(arg, args[0])
+      else
+        "#{m} is not a method of #{self}"
+      end
+    end
   end
 end

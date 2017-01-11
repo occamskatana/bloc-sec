@@ -2,12 +2,11 @@ require_relative 'entry'
 require "csv"
 require 'bloc_record/base'
 
-
 class AddressBook < BlocRecord::Base
   attr_reader :entries
 
   def add_entry(name, phone_number, email)
-   Entry.create(name: name, phone_number: phone_number, email: email, address_book_id: 1 )
+   Entry.create(name: name, phone_number: phone_number, email: email, address_book_id: 1)
   end
 
   def import_from_csv(file_name)
