@@ -8,7 +8,8 @@ class MenuController
   end
 
   def main_menu
-    puts "Main Menu - #{@address_book.name} Address Book - #{Entry.count} entries"
+    puts "Main Menu - #{@address_book.name} Address Book Selected - #{@address_book.entries.count} entries"
+    puts "0 - Switch AddressBook"
     puts "1 - View all entries"
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
@@ -19,34 +20,38 @@ class MenuController
     selection = gets.to_i
 
     case selection
-      when 1
-        system "clear"
-        view_all_entries
-        main_menu
-      when 2
-        system "clear"
-        create_entry
-        main_menu
-      when 3
-        system "clear"
-        search_entries
-        main_menu
-      when 4
-        system "clear"
-        read_csv
-        main_menu
-      when 5
-        puts "Good-bye!"
-        exit(0)
-      else
-        system "clear"
-        puts "Sorry, that is not a valid input"
-        main_menu
+    when 0
+      system "clear"
+      select_address_book_menu
+      main_menu
+    when 1
+      system "clear"
+      view_all_entries
+      main_menu
+    when 2
+      system "clear"
+      create_entry
+      main_menu
+    when 3
+      system "clear"
+      search_entries
+      main_menu
+    when 4
+      system "clear"
+      read_csv
+      main_menu
+    when 5
+      puts "Good-bye!"
+      exit(0)
+    else
+      system "clear"
+      puts "Sorry, that is not a valid input"
+      main_menu
     end
   end
 
   def view_all_entries
-    Entry.all.each do |entry|
+    @address_book.entries.each do |entry|
       system "clear"
       puts entry.to_s
       entry_submenu(entry)
@@ -75,7 +80,7 @@ class MenuController
   def search_entries
     print "Search by name: "
     name = gets.chomp
-    match = Entry.find_by(name)
+    match = @address_book.find_entry(name)
     system "clear"
     if match
       puts match.to_s
@@ -114,19 +119,19 @@ class MenuController
     selection = gets.chomp
 
     case selection
-      when "n"
-      when "d"
-        delete_entry(entry)
-      when "e"
-        edit_entry(entry)
-        entry_submenu(entry)
-      when "m"
-        system "clear"
-        main_menu
-      else
-        system "clear"
-        puts "#{selection} is not a valid input"
-        entry_submenu(entry)
+    when "n"
+    when "d"
+      delete_entry(entry)
+    when "e"
+      edit_entry(entry)
+      entry_submenu(entry)
+    when "m"
+      system "clear"
+      main_menu
+    else
+      system "clear"
+      puts "#{selection} is not a valid input"
+      entry_submenu(entry)
     end
   end
 
@@ -157,23 +162,37 @@ class MenuController
     selection = gets.chomp
 
     case selection
-      when "d"
-        system "clear"
-        delete_entry(entry)
-        main_menu
-      when "e"
-        edit_entry(entry)
-        system "clear"
-        main_menu
-      when "m"
-        system "clear"
-        main_menu
-      else
-        system "clear"
-        puts "#{selection} is not a valid input"
-        puts entry.to_s
-        search_submenu(entry)
+    when "d"
+      system "clear"
+      delete_entry(entry)
+      main_menu
+    when "e"
+      edit_entry(entry)
+      system "clear"
+      main_menu
+    when "m"
+      system "clear"
+      main_menu
+    else
+      system "clear"
+      puts "#{selection} is not a valid input"
+      puts entry.to_s
+      search_submenu(entry)
     end
   end
-end
 
+  def select_address_book_menu 
+    puts "Select an Address Book"
+    AddressBook.all.each_with_index do |address_book, index|
+      puts "#{index} - #{address_book.name}"
+    end
+
+    index = gets.chomp.to_i
+
+    @address_book = AddressBook.find(index + 1)
+    system "clear"
+    return if @address_book
+    puts "Please Select a valid index"
+    select_address_book_menu
+  end
+end
