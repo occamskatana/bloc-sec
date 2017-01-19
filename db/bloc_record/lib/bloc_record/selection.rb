@@ -3,15 +3,18 @@ require 'bloc_record/utility'
 
 module Selection
   def find_one(id)
+  	validate_integer(id)
     row = connection.get_first_row <<-SQL
 	    SELECT #{columns.join ","} FROM #{table}
 	    WHERE id = #{id};
-    SQL
-
+	  SQL
     init_object_from_row(row)
   end
 
   def find(*ids)
+  	ids.each do |id|
+  		validate_integer(id)
+  	end
   	if id.length == 1
   		find_one(ids.first)
   	else
@@ -70,7 +73,7 @@ module Selection
   def find_by(attribute, value)
   	row = connection.get_first_row <<-SQL 
   		SELECT #{columns.join(",")} from #{table}
-  		WHERE #{atribute} = #{BlocRecord::Utility.sql_strings(value)};
+  		WHERE #{attribute} = #{BlocRecord::Utility.sql_strings(value)};
   	SQL
 
   	init_object_from_row(row)
@@ -104,9 +107,8 @@ module Selection
   	init_object_from_row(row)
   end
 
-
-
   def take(num=1)
+   validate_integer(num)
    if num > 1
      rows = connection.execute <<-SQL
        SELECT #{columns.join ","} FROM #{table}
@@ -128,7 +130,42 @@ module Selection
 		rows_to_array(rows)
 	end
 
+  def find_each(options={}, &block)
+    rows = connection.execute <<-SQL 
+      SELECT #{columns.join ","} FROM #{table}
+      LIMIT #{options[:batch_size]}
+    SQL
+
+    rows_array = rows_to_array(rows)
+
+    if block_given?
+      rows_array.each do |row|
+        yield(row)
+      end
+    end
+    rows_array
+  end  
+
+  def find_in_batches(options={}, &block)
+    batch = find_each(start: options[:start], batch_size: options[:batch_size])
+    object_array = []
+    batch.each do |row|
+      object_array << init_object_from_row(row)
+    end
+
+    if block_given?
+      yield(object_array, batch)
+    end 
+
+    object_array
+  end 
+
 	private
+
+	def validate_integer(int)
+		raise "ID cannot be negative" if int < 0
+		raise "ID must be an integer" if int.class != Integer
+	end	
 
 	def init_object_from_row(row)
 		if row 
@@ -144,11 +181,3 @@ module Selection
 end
 
 
-# Method added for assignment and potentially no longer needed
-# def find_by(attribute, value)
-# 	results = []
-# 	connection.execute("SELECT * FROM #{table} WHERE #{attribute}=#{value};") do |row|
-# 		row << results
-# 	end
-# 	return results
-# end
