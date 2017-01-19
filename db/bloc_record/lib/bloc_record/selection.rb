@@ -1,5 +1,6 @@
 require 'sqlite3'
 require 'bloc_record/utility'
+require 'bloc_record/join_query'
 
 module Selection
   def find_one(id)
@@ -12,7 +13,7 @@ module Selection
   end
 
   def find(*ids)
-  	if id.length == 1
+  	if ids.length == 1
   		find_one(ids.first)
   	else
   		rows = connection.execute <<-SQL 
@@ -21,6 +22,42 @@ module Selection
   		SQL
   	end
   	rows_to_array(rows)
+  end
+
+  def order(*args)
+    case args.first 
+    when String
+      if args.count > 1
+        order_expression = args.join(", ")
+      else
+        order_expression = args
+      end
+    when Hash 
+      expression_hash = BlocRecord::Utility.convert_keys(args.first)
+      expression = expression_hash.map{|key, value| "#{key} #{value}"}.join(" ,")
+    end
+
+    rows = connection.execute <<-SQL 
+      SELECT * from #{table}
+      ORDER_BY #{expression};
+    SQL
+
+    rows_to_array(rows)
+  end
+
+  def joins(*args)
+    args_hash = BlocRecord::Utility.convert_keys(args.first)
+    expression = args_hash.map {|key, value| "INNER JOIN #{key} on #{key}.#{table}_id = #{table}.id \n INNER JOIN #{value} ON #{value}.#{key}_id = #{key}.id"}.join
+
+    sql = <<-SQL 
+     SELECT *  FROM #{table}
+     INNER JOIN #{expression}
+    SQL
+
+    rows = connection.execute(sql)
+    row_array = rows_to_array(rows)
+
+    return JoinQuery.new(row_array, sql)
   end
 
   def join(*args)
