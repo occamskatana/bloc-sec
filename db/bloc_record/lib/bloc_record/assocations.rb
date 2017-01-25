@@ -35,4 +35,20 @@ module Assocations
 			end
 		end
 	end
+
+	def has_one(assocation)
+		define_method(assocation) do 
+			assocation_name = assocation.to_s
+
+			row = self.class.connection.get_first_row <<-SQL 
+				SELECT * FROM #{table}
+				WHERE #{self.class.table}_id = #{self.id}
+				LIMIT 1
+			SQL
+
+			class_name = assocation_name.classify.constantize
+
+			return class_name.new(Hash[class_name.columns.zip(row)])
+		end
+	end
 end
