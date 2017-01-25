@@ -15,6 +15,10 @@ module Persistence
 		self.class.update(self.id, updates)
 	end
 
+	def destroy(id)
+		self.class.destroy(self.id)
+	end
+
 	module ClassMethods
 		def create(attrs)
 			attrs = BlocRecord::Utility.convert_keys(attrs)
@@ -32,6 +36,33 @@ module Persistence
 			data = Hash[attrs.zip attrs.values]
 			data["id"] = connection.execute("SELECT last_insert_rowid();")[0][0]
 			new(data)
+		end
+
+		def destroy(*id)
+			if id.length > 1
+				where_clause = "WHERE id IN (#{id.join(",")})"
+			else
+				where_clause = "#{id.first}"
+			end
+			connection.execute "DELETE FROM #{table} #{where_clause}"
+			return true
+		end
+
+		def destroy_all(conditions_hash=nil)
+			if conditions_hash && !conditions_hash.empty?
+				conditions_hash = BlocRecord::Utility.convert_keys(conditions_hash)
+				conditions = conditions_hash.map do |key, value|
+					"#{key}=#{BlocRecord::Utility.sql_strings(value)}"
+				end.join(" and ")
+				connection.execute <<-SQL 
+					DELETE FROM #{table}
+					WHERE #{conditions}
+				SQL
+			else
+				connection.execute "DELETE FROM #{table}"
+			end
+
+			return true
 		end
 
 		def update_all(updates)
