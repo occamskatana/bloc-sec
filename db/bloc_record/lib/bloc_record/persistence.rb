@@ -15,7 +15,7 @@ module Persistence
 		self.class.update(self.id, updates)
 	end
 
-	def destroy(id)
+	def destroy
 		self.class.destroy(self.id)
 	end
 
@@ -48,16 +48,31 @@ module Persistence
 			return true
 		end
 
-		def destroy_all(conditions_hash=nil)
-			if conditions_hash && !conditions_hash.empty?
-				conditions_hash = BlocRecord::Utility.convert_keys(conditions_hash)
-				conditions = conditions_hash.map do |key, value|
-					"#{key}=#{BlocRecord::Utility.sql_strings(value)}"
-				end.join(" and ")
-				connection.execute <<-SQL 
+		def destroy_all(*conditions_hash)
+			if !conditions_hash.empty?
+				case conditions_hash
+				when Hash 
+					conditions_hash = BlocRecord::Utility.convert_keys(conditions_hash)
+					conditions = conditions_hash.map do |key, value|
+						"#{key}=#{BlocRecord::Utility.sql_strings(value)}"
+					end.join(" and ")
+					connection.execute <<-SQL 
 					DELETE FROM #{table}
 					WHERE #{conditions}
-				SQL
+					SQL
+				when String
+					conditions = conditions_hash
+					connection.execute <<-SQL 
+					DELETE FROM #{table}
+					WHERE #{conditions}
+					SQL
+				when Array
+					param = conditions_hash.first 
+					value = conditions_hash.last
+					statement = connection.prepare "DELETE FROM #{table} where #{param}"
+					statement.execute(value)
+				end
+
 			else
 				connection.execute "DELETE FROM #{table}"
 			end
