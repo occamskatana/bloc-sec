@@ -1,5 +1,5 @@
 require 'bloc_record'
-BlocRecord.connect_to('./address_bloc.sqlite')
+BlocRecord.connect_to('address_bloc.sqlite')
 
 require_relative '../models/address_book'
 require_relative '../models/entry'

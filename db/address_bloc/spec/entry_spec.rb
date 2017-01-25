@@ -34,7 +34,7 @@ RSpec.describe Entry do
       entry = Entry.new('Ada Lovelace', '010.012.1815', 'augusta.king@lovelace.com')
       expected_string = "Name: Ada Lovelace\nPhone Number: 010.012.1815\nEmail: augusta.king@lovelace.com"
       expect(entry.to_s).to eq(expected_string)
-    end
+    end1
   end
 end
 

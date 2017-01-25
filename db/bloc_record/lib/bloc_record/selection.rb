@@ -1,5 +1,6 @@
 require 'sqlite3'
 require 'bloc_record/utility'
+require 'bloc_record/collection'
 
 module Selection
   def find_one(id)
@@ -104,8 +105,6 @@ module Selection
   	init_object_from_row(row)
   end
 
-
-
   def take(num=1)
    if num > 1
      rows = connection.execute <<-SQL
@@ -138,7 +137,8 @@ module Selection
 	end
 
 	def rows_to_array(rows)
-		rows.map {|row| new(Hash[columns.zip(row)])}
+		collection = BlocRecord::Collection::Collection.new
+    rows.each {|row| collection << new(Hash[columns.zip(row)])}
 	end
 
 end
