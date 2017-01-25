@@ -44,8 +44,8 @@ module Persistence
 			updates_array = updates.map {|key, value| "#{key}=#{BlocRecord::Utility.sql_strings(value)}"}
 			if ids.class == Fixnum
 				where_clause = "WHERE id = #{ids}"
-			elsif ids.class === Array
-				where_clause = ids.empty? ? ";" : "WHERE id IN (#{ids.join(",")})"  
+			elsif ids.class == Array
+				where_clause = ids.empty? ? ";" : "WHERE id IN (#{ids.join(",")})"
 			else
 				where_clause = ";"
 			end

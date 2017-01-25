@@ -21,5 +21,15 @@ module BlocRecord
         self.instance_variable_set("@#{col}", options[col])
       end
     end
+
+    def method_missing(method_name, *args)
+      if method_name[0..6] == "update_"
+        param = method_name[7..method_name.length - 1]
+        record = self.where({param: args[0]})[0]
+        self.update(record.id, {name: args[0]})
+      else 
+        return "#{method_name} is not a method of #{self}"
+      end
+    end
   end
 end
