@@ -1,0 +1,19 @@
+PATH
+  remote: ../jcworks
+  specs:
+    jcworks (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    rack (2.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  jcworks!
+  rack
+
+BUNDLED WITH
+   1.13.7
