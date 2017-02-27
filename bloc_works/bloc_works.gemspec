@@ -1,17 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'jcworks/version'
+require 'bloc_works/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "jcworks"
-  spec.version       = Jcworks::VERSION
+  spec.name          = "bloc_works"
+  spec.version       = BlocWorks::VERSION
   spec.authors       = ["John Carter"]
   spec.email         = ["johngallweycarter@gmail.com"]
 
-  spec.summary       = %q{A mvc web framework as an experiment in design and learning}
-  spec.description   = %q{read above}
-  spec.homepage      = "http://www.rmtechnology.io"
+  spec.summary       = %q{Rails ripoff.}
+  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -33,5 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rack", "~> 1.6"
-  spec.add_runtime_dependency "erubis", "~> 2.7"
+  spec.add_runtime_dependency "erubis"
+  spec.add_runtime_dependency "bloc_record"
 end

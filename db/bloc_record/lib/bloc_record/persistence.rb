@@ -12,11 +12,8 @@ module Persistence
 			attrs = BlocRecord::Utility.convert_keys(attrs)
 			attrs.delete("id")
 			vals = attributes.map {|key| BlocRecord::Utility.sql_strings(attrs[key])}
-			
-			connection.execute <<-SQL
-				INSERT INTO #{table} (#{attributes.join ","})
-				VALUES (#{vals.join ","});
-			SQL
+			sql = "INSERT INTO #{table} (#{attributes.join ","}) VALUES (#{vals.join ","});"
+			connection.execute(sql)
 
 			data = Hash[attributes.zip attrs.values]
 			data["id"] = connection.execute("SELECT last_insert_rowid();")[0][0]
